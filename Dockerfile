@@ -21,8 +21,6 @@ RUN apt-get install -y \
     libglibmm-2.4-dev autoconf autoconf-archive libusb-1.0-0-dev \
     libftdi1-dev check doxygen python3-numpy
 
-RUN mkdir -p /dist
-
 # === libserialport ===
 WORKDIR /build
 RUN tar xzvf libserialport-0.1.1.tar.gz
@@ -30,7 +28,7 @@ WORKDIR /build/libserialport-0.1.1
 RUN ./configure --prefix=/usr
 RUN make
 RUN make install
-RUN make DESTDIR=/dist install
+RUN make DESTDIR=/dist/sigrok-bundle install
 
 # === libsigrok ===
 WORKDIR /build
@@ -39,7 +37,7 @@ WORKDIR /build/libsigrok-0.5.0
 RUN ./configure --prefix=/usr
 RUN make
 RUN make install
-RUN make DESTDIR=/dist install
+RUN make DESTDIR=/dist/sigrok-bundle install
 
 # === libsigrokdecode ===
 WORKDIR /build
@@ -48,7 +46,7 @@ WORKDIR /build/libsigrokdecode-0.5.0
 RUN ./configure --prefix=/usr
 RUN make
 RUN make install
-RUN make DESTDIR=/dist install
+RUN make DESTDIR=/dist/sigrok-bundle install
 
 # === sigrok-cli ===
 WORKDIR /build
@@ -57,7 +55,7 @@ WORKDIR /build/sigrok-cli-0.7.0
 RUN ./configure --prefix=/usr
 RUN make
 RUN make install
-RUN make DESTDIR=/dist install
+RUN make DESTDIR=/dist/sigrok-bundle install
 
 # === pulseview ===
 WORKDIR /build
@@ -66,4 +64,8 @@ WORKDIR /build/pulseview-0.4.0
 RUN cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr .
 RUN make
 RUN make install
-RUN make DESTDIR=/dist install
+RUN make DESTDIR=/dist/sigrok-bundle install
+
+WORKDIR /dist
+ADD . /dist
+RUN dpkg-deb --build sigrok-bundle

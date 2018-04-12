@@ -1,0 +1,7 @@
+Package: sigrok-bundle
+Architecture: amd64
+Maintainer: Tadas Sasnauskas <tadas@yoyo.lt>
+Depends: libzip2
+Priority: optional
+Version: 0.0.1
+Description: Sigrok libraries, sigrok-cli and Pulseview bundled into a single package.

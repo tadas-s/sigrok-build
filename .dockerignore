@@ -1,0 +1,6 @@
+*.deb
+.git
+.idea
+.gitignore
+Dockerfile
+
