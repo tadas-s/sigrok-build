@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
 WORKDIR /build
 
@@ -19,7 +19,7 @@ RUN apt-get install -y \
     libglib2.0-dev libboost-test-dev libboost-serialization-dev \
     libboost-filesystem-dev libboost-system-dev libqt5svg5-dev qtbase5-dev \
     libglibmm-2.4-dev autoconf autoconf-archive libusb-1.0-0-dev \
-    libftdi1-dev check doxygen python3-numpy
+    libftdi-dev check doxygen python3-numpy
 
 # === libserialport ===
 WORKDIR /build
